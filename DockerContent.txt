@@ -44,4 +44,9 @@ A Dockerfile is a configuration file used in Docker to define the steps and inst
 Dockerfile contains a series of instructions that describe how to create an image, such as specifying the base image, installing dependencies, copying files, exposing ports, setting environment variables, and defining the entry point for the application. It's a key part of Docker's infrastructure-as-code approach, making it easy to version control, share, and reproduce containerized applications and services.
 
 
+Docker compose:
+---------------
 
+Docker Compose is a tool for defining and running multi-container Docker applications. It uses a YAML file (usually named docker-compose.yml) to configure services, networks, and volumes, making it easier to manage complex applications
+
+Docker-Compose works in all environments; production, staging, development, testing, as well as CI workflows.

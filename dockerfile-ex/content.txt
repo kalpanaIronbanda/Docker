@@ -3,7 +3,7 @@ Dockerfile
 
 A Dockerfile is a configuration file used in Docker to define the steps and instructions needed to build a Docker image.
 
-Dockerfile typically contains a series of instructions that describe how to create an image, such as specifying the base image, installing dependencies, copying files, exposing ports, setting environment variables, and defining the entry point for the application. It's a key part of Docker's infrastructure-as-code approach, making it easy to version control, share, and reproduce containerized applications and services.
+Dockerfile contains a series of instructions that describe how to create an image, such as specifying the base image, installing dependencies, copying files, exposing ports, setting environment variables, and defining the entry point for the application. It's a key part of Docker's infrastructure-as-code approach, making it easy to version control, share, and reproduce containerized applications and services.
 
 Let us take an example of dockerfile...
 

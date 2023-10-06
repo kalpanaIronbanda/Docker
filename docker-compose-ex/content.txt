@@ -1,5 +1,5 @@
 Docker compose:
-
+==============
 
 Docker Compose is a tool for defining and running multi-container Docker applications. It uses a YAML file (usually named docker-compose.yml) to configure services, networks, and volumes, making it easier to manage complex applications
 
@@ -14,7 +14,6 @@ Sample example of docker compose file:
 
 First of all we have to list out the all services to start with docker-compose
 The default name of the docker-compose file is docker-compose.yaml
-
 
 Docker-compose.yml 
 ====================

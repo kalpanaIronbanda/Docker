@@ -1,0 +1,48 @@
+Start containers defined in the docker-compose.yml file. It creates and starts containers for all services defined in the Compose file.
+
+        docker-compose up
+
+Start containers in detached mode, running them in the background.
+
+        docker-compose up -d
+
+Stop and remove containers, networks, and volumes defined in the docker-compose.yml file.
+
+        docker-compose down
+
+Build or rebuild Docker images defined in the Compose file.
+
+        docker-compose build
+
+List the status of containers defined in the Compose file.
+
+        docker-compose ps
+
+
+View logs from containers defined in the Compose file. You can specify a service name to view logs for a specific service.
+
+        docker-compose logs
+
+        docker-compose logs myservice
+
+Pull the latest images for services defined in the Compose file without starting containers.
+
+        docker-compose pull
+
+Restart containers defined in the Compose file.
+
+        docker-compose restart
+
+Pause and unpause services.
+
+        docker-compose pause myservice
+        
+        docker-compose unpause myservice
+
+Scale the number of containers for a service. For example, to run three instances of a service.
+
+        docker-compose up -d
+        
+        docker-compose scale myservice=3
+
+

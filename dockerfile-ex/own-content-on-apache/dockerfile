@@ -1,0 +1,9 @@
+# Use "scratch" as the base image
+FROM scratch
+
+# Add the necessary files or directories to the image
+COPY . .
+
+# Set the default command to be executed when a container is run
+CMD ["bash", "-c", "echo Hello, World!"]
+

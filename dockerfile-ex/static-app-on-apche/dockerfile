@@ -1,0 +1,19 @@
+# Start with a minimal Linux distribution as the base image
+FROM alpine:latest
+
+# Install Apache and PHP
+RUN apk update && apk add apache2 && apk add unzip
+
+# Download the Grandcoffee template
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page292/grandcoffee.zip /tmp/grandcoffee.zip
+
+# Extract the Grandcoffee template
+RUN unzip /tmp/grandcoffee.zip -d /var/www/localhost/htdocs/ && \
+    mv /var/www/localhost/htdocs/html/* /var/www/localhost/htdocs/ && \
+    rm -rf /var/www/localhost/htdocs/html /tmp/grandcoffee.zip
+
+# Expose port 80 for Apache
+EXPOSE 80
+
+# Start Apache service when the container starts
+CMD ["httpd", "-D", "FOREGROUND"]

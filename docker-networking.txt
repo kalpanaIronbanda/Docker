@@ -1,0 +1,104 @@
+docker networking:
+------------------
+
+Default networks:
+----------------
+
+When we install docker it creates three networks automatically
+
+Bridge
+
+None
+
+host
+
+Bridge is the default network that a container gets attached to.
+
+If we want to associate the container with any other network is specified network information using the network commandline parameter like 
+
+        docker run <imagename> --network=none 
+
+
+Bridge:
+------
+
+Bridge network is a private internal network created by docker on the host.
+
+all containers gets attached to it by default and they get an internal ip address usually in the range 172.17.x.x series.
+
+The containers can access each other by using this internal ip if required.(To access these containers from outside we have to map the port on the host)
+
+Host:
+----
+
+Another way to access the containers externally is to associate the containers to the host network.This takes out any network isolation between the docker host and the docker conatainer.
+
+ex: If we were run a web server on the port 5000 in a web  conatainer, it is automatically accessable on the same port externally without requiring any port mapping 
+
+In the host network we will not able to run multiple web containers on the same host and the same port 
+
+none:
+-----
+
+In the none network the containers are not attached to any other network and doesn't have any access to the external network or internal network(within the conatiners), they run in isolated network. 
+
+
+User-defined networks:
+----------------------
+
+By default docker creates a series of internal ip but what if we want to create isolated network with other internal ip range, for that we can create our own network with desired series of ip range 
+
+        docker network create --driver bridge --subnet <ip range> <network name>
+
+To list all the networks we can use the following command
+
+        docker network ls 
+
+We can see the network settings and ip address range with inspect command
+
+        docker network inspect <network name>
+
+
+Workflow:
+----------
+
+docker has built-in dns server that helps the conatainers to resolve with each other using the name of the container. 
+DNS server always runs at 127.0.0.11 ip and it contains the record set of container name with ip 
+
+how does docker impliment networking what's the technology behind it like how were the containers isolate within the host...
+
+docker uses network namespaces that creates a seperate namespace for each container. It then uses virtual ethernet pairs to connect containers together 
+
+
+
+
+Docker networking commands list:
+--------------------------------
+
+List all the networks created on the Docker host.
+
+        docker network ls
+
+Create a new custom bridge, overlay, or host network.
+
+        docker network create <mynetwork>
+
+Display detailed information about a specific network.
+
+        docker network inspect <mynetwork>
+
+Remove one or more networks.
+
+        docker network rm <mynetwork>
+
+Remove all unused networks.
+
+        docker network prune
+
+Attach a container to a network.
+
+        docker network connect <mynetwork> <mycontainer>
+
+Detach a container from a network
+
+        docker network disconnect <mynetwork> <mycontainer>

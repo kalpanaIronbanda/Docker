@@ -1,0 +1,85 @@
+Dockerfile
+----------
+
+A Dockerfile is a configuration file used in Docker to define the steps and instructions needed to build a Docker image.
+
+Dockerfile typically contains a series of instructions that describe how to create an image, such as specifying the base image, installing dependencies, copying files, exposing ports, setting environment variables, and defining the entry point for the application. It's a key part of Docker's infrastructure-as-code approach, making it easy to version control, share, and reproduce containerized applications and services.
+
+Let us take an example of dockerfile...
+
+By default when we run the docker run command docker will look for the dockerfile(we can use other name as well but we have to mention the path while running it)
+
+#dockerfile (This file contains the steps to install apache and download static content)
+
+        # Start with a minimal Linux distribution as the base image
+
+        FROM alpine:latest
+
+        # Install Apache and PHP
+
+        RUN apk update && apk add apache2 && apk add unzip
+
+        # Download the Grandcoffee template
+
+        ADD https://www.free-css.com/assets/files/free-css-templates/download/page292/grandcoffee.zip /tmp/grandcoffee.zip
+
+        # Extract the Grandcoffee template
+
+        RUN unzip /tmp/grandcoffee.zip -d /var/www/localhost/htdocs/ && \
+            mv /var/www/localhost/htdocs/html/* /var/www/localhost/htdocs/ && \
+            rm -rf /var/www/localhost/htdocs/html /tmp/grandcoffee.zip
+
+        # Expose port 80 for Apache
+
+        EXPOSE 80
+
+        # Start Apache service when the container starts
+
+        CMD ["httpd", "-D", "FOREGROUND"]
+
+
+Let's pull this apart piece by piece
+
+FROM
+-----
+
+The first part is the FROM command, which tells us what image to base this off of. This is the multi-layered approach that makes Docker so efficient and powerful.We can use our own images as base images for the new image.
+
+RUN
+----
+
+The next set of calls are the RUN commands. This is what runs within the container at build time.All linux distribution commands will be run by appending with RUN keyword except the commands which were will start the process like systemctl start apache, py app.py,..etc.
+
+ADD
+---
+
+ADD will used to download the files as well as extracting while running(It will extract all file except tar )
+
+EXPOSE
+------
+
+EXPOSE will be used for Specifying which network ports should be exposed for communication with the container.
+
+CMD
+----
+
+Specifying the command that should be run when a container is started.
+
+There are some other components which will be used in the dockerfile
+
+ENTRYPOINT
+-----------
+
+Alternative of CMD, we can use ENTRYPOINT for the same purpose, which makes it harder to override the command.The ENTRYPOINT command also allows arguments to be set from the Docker run command as well, whereas CMD can’t.
+
+COPY
+-----
+
+The COPY command is simply as it sounds. It can copy a file (in the same directory as the Dockerfile) to the container.
+
+ENV 
+-----
+
+This sets the environment variables, which can be used in the Dockerfile and any scripts that it calls. These are persistent with the container too, so they can be referenced at any time
+
+

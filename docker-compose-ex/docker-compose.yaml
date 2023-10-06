@@ -1,0 +1,42 @@
+# #Version 1: This is the initial version of Docker Compose files and is now considered deprecated. It supports defining services, linking containers, and specifying ports.
+
+#     redis:
+#       image: redis 
+#     web:
+#       image: nginx:latest
+#       ports:
+#         - "80:80"
+#       links:
+#         - redis
+
+
+# #Version 2: Introduced additional features like networks and volumes, making it more versatile for complex applications. It also introduced the services key as the root element instead of using the service name directly.
+
+#     version: '2'
+#     services:
+#       web:
+#         image: nginx:latest
+#         ports:
+#           - "80:80"
+#       db:
+#         image: postgres:latest
+#         volumes:
+#           - mydata:/var/lib/postgresql/data
+
+# #Version 3: Introduced more advanced features, including support for deploying services in Docker Swarm mode. It extended the Compose file syntax to better align with Swarm services and introduced the deploy section for Swarm-specific configurations.
+
+#     version: '3'
+#     services:
+#       web:
+#         image: nginx:latest
+#         ports:
+#           - "80:80"
+#         deploy:
+#           replicas: 3
+
+   
+    
+
+
+
+

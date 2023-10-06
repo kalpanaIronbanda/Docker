@@ -1,0 +1,47 @@
+Docker :
+--------
+
+docker is an opensource containerization tool which is used to build images and run those on container platforms.
+
+
+docker engine:
+-------------
+
+docker engine is simply refered to the host with docker installed on it.
+when we install docker on a linux we are actually installing three different components..
+1.docker demon, 2. REST API server and 3. docker cli
+
+    1) docker daemon :
+    ----------------
+            docker daemon is a background process that manages docker objects such as images,containers,volumes and networks.
+
+    2) REST API :
+    ------------
+            REST API server is the API interface that programmes can used to talk to doemon and provide instructions. We can create our own tools using this rest API.
+
+    3)docker cli :
+    --------------
+
+            It is ntg bt the command line interface that we use to perform actions such as building an image, running a container..etc
+
+            
+Docker Images:
+--------------
+
+Images are multi-layered self-contained files that act as the template for creating containers. They are like a frozen, read-only copy of a container. Images can be exchanged through registries.
+
+
+containers:
+------------
+
+Just like virtual machines, containers are completely isolated environments from the host system as well as from each other. They are also a lot lighter than the traditional virtual machine, so a large number of containers can be run simultaneously without affecting the performance of the host system.‌
+
+Dockerfile:
+------------
+
+A Dockerfile is a configuration file used in Docker to define the steps and instructions needed to build a Docker image.
+
+Dockerfile contains a series of instructions that describe how to create an image, such as specifying the base image, installing dependencies, copying files, exposing ports, setting environment variables, and defining the entry point for the application. It's a key part of Docker's infrastructure-as-code approach, making it easy to version control, share, and reproduce containerized applications and services.
+
+
+

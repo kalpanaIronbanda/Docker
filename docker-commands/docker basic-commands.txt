@@ -1,0 +1,138 @@
+docker pull - pulls the image from artifact
+
+        docker pull nginx
+
+It to pull the nginx image 
+
+docker build - builds an image by taking the instructions from the dockerfile
+
+                docker build -t imagename:tag dockerfile
+
+It will dockerfile as an input and create an image for us with the name we replaced with imagename and tag as well
+
+
+
+docker run - it is used to run a conatiner from an image 
+example:
+
+        docker run nginx
+
+The command will run the instance of the nginx application if nginx image is already exits on the docker host,if the nginx image is not present on the host it will go out to the dockerhub and pulls the image down and then starts the container.(for the subsequent executions same image will be used)
+
+#port mapping
+
+        docker run -p hostport:containerport -d imagename:tag
+
+This command will map the hostport to the containerport to accesss the application and   runs in the background mode
+
+Volume mapping
+
+Before mapping the volume we have to create the volume in the docker.
+To create the volume use below command
+
+                docker create volume <volumename>
+
+To map the volume use the below command
+
+                docker run -v <volumename>:<path of the container volume> -d imagename:tag
+
+This command will map the destination path with the source path to store the data. lets say we are running a mysql container and we have created database and tables within it which will store in the path of /etc/lib/mysql. If we delete the container all data which is stored in that path will gone, there docker volumes takes plays and stores the data in the host as well by using volume mapping in the docker
+
+naming the container
+
+                docker run -d --name=<containername> <imagename>
+
+It will be used to give the name for the container 
+
+links
+
+                docker run -d -p hostport:containerport --links <container1>:<container2> imagename:tag
+
+links is a command line option used to link two containers. lets assue that image is vote and it is dependent on the container1 which is redis but there are many redis containers running on the docker host, so there is a problem that vote container doesn't connect to the exact redis container so there links takes place. 
+
+docker inspect - it will gives the additional info of the container as well as images(we can place image id in place of container id in the command)
+
+                docker inspect <containerid>
+
+
+It returns all the details of the specific container in the json format such mount, network settings, configuration data, etc.
+
+
+
+
+
+
+
+docker ps - lists all the containers and some basic info about them like
+
+        docker ps
+command output looks like 
+
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS      PORTS   NAMES
+1234567        nginx     "nginx -g 'doem..'" up to 6sec    80     silly-cat  
+
+
+It list the running containers and gives some info 
+
+        docker ps -a
+
+It will list the all running containers and previously stoped or  exited containers
+
+docker stop - stops the running container but we have provide either the container id or the container name in the command
+
+        docker stop silly-cat
+
+It will the conatainer silly-cat(if you are not sure about the name, you can run docker ps command first to get it)
+
+To stop all the containers at a time we can use the below command
+
+                docker stop $(docker ps -aq)
+
+docker rm - Removes the exited or stopped command permanently
+
+        docker rm silly-cat
+
+After removing the container it will not listed in the docker ps command so after this command check the containers list
+
+To remove all the containers at a time we use the below command 
+
+                docker rm $(docker ps -aq)
+
+
+
+docker images - it will list the images which are present on the docker host
+
+        docker images
+
+The output will look like 
+
+REPOSITORY       TAG       IMAGE ID       CREATED        SIZE
+nginx            v0.0.39   67a4b1138d2d   6 mins ago    1.05GB
+
+docker rmi - removes an image 
+
+To remove an image which is no longer planned for us we can remove it by docker rmi command but make sure that no containers are running on off of that image before removing it. we must stop and delete all the dependent containers to able to delete an image 
+
+        docker rmi nginx
+
+It will remove the nginx image permanently
+
+To remove all the images at a time we can use the below command
+                docker rmi $(docker images -aq)
+
+docker exec - used to login to the container to execute commands
+
+                docker exec <container id> sh
+                
+                docker exec <container id> <command to execute> sh
+
+The first command will login to the container and then we have to execute our commands there and the second command will execute the command inside the container
+
+
+
+    
+
+
+
+
+

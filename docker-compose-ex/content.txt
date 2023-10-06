@@ -1,0 +1,50 @@
+Docker compose:
+
+
+Docker Compose is a tool for defining and running multi-container Docker applications. It uses a YAML file (usually named docker-compose.yml) to configure services, networks, and volumes, making it easier to manage complex applications
+
+Docker-Compose works in all environments; production, staging, development, testing, as well as CI workflows. It also has commands for managing the whole lifecycle of your application:
+
+Start, stop, and rebuild services
+View the status of running services
+Stream the log output of running services
+Run a one-off command on a service
+
+Sample example of docker compose file:
+
+First of all we have to list out the all services to start with docker-compose
+The default name of the docker-compose file is docker-compose.yaml
+
+
+Docker-compose.yml 
+====================
+
+        version: '3'
+        services:
+        apache:
+            build:
+            context: .
+            dockerfile: apache-Dockerfile
+            ports:
+            - "8002:80"
+
+        static:
+            build:
+            context: .
+            dockerfile: static-Dockerfile
+            ports:
+            - "8000:80"
+
+This file will build the both images and run with single command docker-compose up
+
+
+References
+----------
+Please click on the links below for further reference:
+
+https://docs.docker.com/compose/
+
+https://docs.docker.com/engine/reference/commandline/compose/
+
+https://github.com/dockersamples/example-voting-app
+

@@ -1,0 +1,24 @@
+Docker Registry
+---------------
+
+A Docker Registry is a service that stores and distributes Docker container images. It acts as a centralized repository for Docker images, allowing users to push and pull container images to and from a common location.
+
+By default docker interacts with dockerhub.
+
+DockerHub is a hosted registry solution by Docker Inc.
+Besides public and private repositories, it also provides:
+automated builds,
+integration with source control solutions like Github and Bitbucket etc.
+
+But we have to use private registries for the images which are not for all
+
+many cloud providers provides registries, if are using self-hosted registry we have to login first. 
+
+        docker login <registry url>
+
+        docker tag myimage:newimage
+
+        docker push <imagename>:tag
+        
+        docker pull <imagename>:tag
+        

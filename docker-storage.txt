@@ -1,0 +1,119 @@
+OverView of how docker manages the file system and how it stores the data
+
+1. How docker stores data on the local file system
+When we install docker on a system it creates a folder i.e. 
+
+/var/lib/docker
+|
+|-- aufs
+|
+|-- containers
+|
+|-- image
+|
+|-- volumes   
+
+This is where docker stores data by default. so all files related to conatiners stores in the containers and images related files in the image folder..
+
+
+But all the content or files which we are created in the conatainers will be deleted after we deleting the container if we want to store perminently we have to create volumes and it will be internally crated in the volumes folder of the /var/lib/docker folder
+
+docker volume create <name-of-the-volume>
+
+There are two types of volume Mounts
+
+1. volume mount :
+
+   volume mount mounts the volume to the /var/lib/docker/volumes directory 
+
+        docker run -v <volume-name>:<containerpath> <imagename>
+
+ 
+
+
+2. bind mount :
+
+  bind mount will mounts a directory from any location on the docker host but we need to specify the full path
+
+        docker run -v <fullvolumepath>:<containerpath> <imagename>
+
+ The above commands will create and mount the volume at the run time 
+
+ Instead of -v arguement we can use mount in the command directly
+
+        docker run --mount type=bind, source=<fullvolumepath>, target=<containerpath>  <imagename>
+
+ This command will do the same as above 
+
+
+Storage Drivers:
+----------------
+
+docker uses the storage drivers to enable layered architecture
+
+some of the common storage drivers are 
+
+AUFS
+
+ZFS
+
+BTRFS
+
+Device Mapper
+
+Overlay
+
+Overlay2
+
+The selection of the storage drivers are depends on the os. For ex for ubuntu the default storage driver is AUFS where as this storage driver is not available on other os
+
+References:
+
+https://docs.docker.com/storage/
+
+https://docs.docker.com/storage/storagedriver/
+
+https://docs.docker.com/storage/volumes/
+
+
+Docker Volume Commands list:
+---------------------------
+
+List all Docker volumes on the host.
+
+        docker volume ls
+
+Create a new Docker volume.
+
+        docker volume create myvolume
+
+Attach a volume to a container when running it. This creates a new volume if it doesn't already exist.
+
+        docker run -v myvolume:/path/in/container myimage
+
+
+Attach a volume to a container using the --mount flag. This provides more advanced options for volume configuration.
+
+        docker run --mount source=myvolume,target=/path/in/container myimage
+
+Display detailed information about a specific volume.
+
+        docker volume inspect myvolume
+
+Remove one or more Docker volumes.
+
+        docker volume rm myvolume
+
+Remove all unused Docker volumes.
+
+        docker volume prune
+
+
+
+
+
+
+
+
+
+
